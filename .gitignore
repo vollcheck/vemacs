@@ -1,0 +1,7 @@
+custom.el
+places
+
+auto-save-list/
+elpa/
+eln-cache/
+transient/
