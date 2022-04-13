@@ -176,11 +176,26 @@
   (global-set-key (kbd "C-z") 'er/expand-region))
 
 (use-package corfu
-  :hook
-  (after-init . corfu-global-mode)
+  :init
+  (corfu-global-mode)
   :custom
   (corfu-auto t)
   (corfu-auto-delay .5))
+
+(use-package dabbrev
+  ;; Swap M-/ and C-M-/
+  :bind (("M-/" . dabbrev-completion)
+         ("C-M-/" . dabbrev-expand)))
+
+(use-package emacs
+  :init
+  (setq
+   ;; TAB cycle if there are only few candidates
+   completion-cycle-threshold 3
+
+   ;; Enable indentation+completion using the TAB key.
+   ;; `completion-at-point' is often bound to M-TAB.
+   tab-always-indent 'complete))
 
 (use-package marginalia
   :hook
