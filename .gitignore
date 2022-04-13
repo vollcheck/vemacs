@@ -1,7 +1,10 @@
 custom.el
 places
+.mc-lists.el
+session.*
 
 auto-save-list/
 elpa/
 eln-cache/
+eshell/
 transient/
