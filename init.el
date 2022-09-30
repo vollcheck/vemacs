@@ -68,6 +68,12 @@
 
 (load custom-file 'noerror)
 
+(setq-default bidi-paragraph-direction 'left-to-right)
+
+(if (version<= "27.1" emacs-version)
+    (setq bidi-inhibit-bpa t))
+
+
 ;; -- Hooks.
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'prog-mode-hook 'subword-mode)
@@ -164,16 +170,39 @@
 	 ("\\.https\\'" . restclient-mode))
   :config (setq restclient-inhibit-cookies t))
 
-(use-package cider)
+(use-package graphql-mode)
 
-(use-package rainbow-delimiters
-  :config
-  (add-hook 'prog-mode-hook 'rainbow-delimiters-mode))
+(use-package json-mode)
+
+(use-package js
+  :mode (("\\.ts\\'" . js-mode)
+	 ("\\.tsx\\'" . js-mode)))
+
+(use-package js2-mode)
+
+(use-package cider
+  ;; Standard cider.
+  :config (setq cider-repl-display-help-banner nil)
+
+  ;; My hacked one.
+  ;; :load-path ("~/.emacs.d/hacks/cider/")  ;; TODO: Compile it.
+  ;; :config (setq cider-repl--insert-banner-p nil
+  ;; 		;; it doesn't matter as long as `cider-repl--insert-banner-p' is nil
+  ;; 		cider-repl-display-help-banner nil
+  ;; 		cider-repl--insert-startup-commands-p nil
+  ;; 		cider-repl--insert-words-of-encouragement-p t)
+
+  :custom
+  (cider-repl-use-clojure-font-lock t)
+  (cider-repl-use-pretty-printing t))
 
 (use-package expand-region
   :config
   (global-unset-key (kbd "C-z"))
   (global-set-key (kbd "C-z") 'er/expand-region))
+
+;; TODO: Install and configure `paredit'.
+;; TODO: Replace corfu/orderless/vertico stack with prescient/selectrum one.
 
 (use-package corfu
   :init
@@ -212,10 +241,7 @@
   :hook
   (after-init . vertico-mode))
 
-;; TODO: To be configured...
-;; (use-package paredit
-;;   :init
-;;   (add-hook 'lisp-mode-hook 'paredit-mode)
-;;   (add-hook 'emacs-lisp-mode-hook 'paredit-mode)
-;;   (add-hook 'clojure-mode-hook 'paredit-mode)
-;;   (add-hook 'cider-repl-mode-hook 'enable-paredit-mode))
+;; !!!
+;; DEFINIETLY you must check following out:
+;; https://github.com/kostafey/ejc-sql
+(use-package ejc-sql)
