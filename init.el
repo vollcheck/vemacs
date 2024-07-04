@@ -81,7 +81,7 @@
   :config (load-theme 'nano-light))
 
 (add-to-list 'default-frame-alist
-	     '(font . "SF Mono"))
+	     '(font . "Firacode"))
 
 (defvar mode-line-symbols
   '(
@@ -164,7 +164,9 @@
 	 ("\\.https\\'" . restclient-mode))
   :config (setq restclient-inhibit-cookies t))
 
-(use-package cider)
+(use-package cider
+  :config
+  (setq cider-repl-display-help-banner nil))
 
 (use-package rainbow-delimiters
   :config
@@ -177,7 +179,7 @@
 
 (use-package corfu
   :init
-  (corfu-global-mode)
+  (global-corfu-mode)
   :custom
   (corfu-auto t)
   (corfu-auto-delay .5))
