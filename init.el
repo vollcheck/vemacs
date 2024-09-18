@@ -77,8 +77,10 @@
 
 ;; (load-theme 'adwaita)
 
-(use-package nano-theme
-  :config (load-theme 'nano-light))
+;; (use-package nano-theme
+;;   :config (load-theme 'nano-light))
+
+
 
 (add-to-list 'default-frame-alist
 	     '(font . "Firacode"))
@@ -159,6 +161,9 @@
 (use-package magit
   :config (global-set-key (kbd "C-x g") 'magit-status))
 
+(use-package git-timemachine
+  )
+
 (use-package restclient
   :mode (("\\.http\\'" . restclient-mode)
 	 ("\\.https\\'" . restclient-mode))
@@ -167,6 +172,9 @@
 (use-package cider
   :config
   (setq cider-repl-display-help-banner nil))
+
+(use-package clj-deps-new
+  )
 
 (use-package rainbow-delimiters
   :config
